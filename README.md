@@ -1,50 +1,15 @@
-# bad-Java-to-C-compiler
+# Custom Programming Language for Atari 400/800
 
-Written in Node.JS
+Compiler written in Node.js. Tested with [this emulator for Mac](https://www.atarimac.com/atari800macx.php).
 
-For now just assume there’s only one class (file): tokenize, abstract syntax tree, compile
+## References
 
-```
-public class Main {
-	int x = 20;
-	
-	public void foo() {
-		System.out.println(x);
-	}
-	
-	public static void main(String[] args) {
-		new Main().foo();
-	}
-}
-```
+.bin is fine, literally just raw machinecode with no header, padded to 2^16 bytes (cartridges are typically 2^13 bytes, i.e. $0000 to $4000)
 
-```
-/* Main.h */
-typedef struct Main Main;
-struct Main {
-	int x;
-};
+atari programming guidebook: https://www.atariarchives.org/agagd/
 
-void Main_init(Main *self);
-void Main_foo(Main *self);
-int main(int argc, char **argv);
+hardware manual: https://www.atarimania.com/documents/atari-400-800-hardware-manual.pdf
 
-/* Main.c */
-#include "main.h"
+some tutorials: https://www.chibiakumas.com/6502/Atari800Atari5200.php
 
-void Main_init(Main *self) {
-	self->x = 20;
-}
-
-void Main_foo(Main *self) {
-	printf(“%d\n”, self->x);
-}
-
-int main(int argc, char **argv) {
-	{
-		Main temp;
-		Main_init(&temp);
-		Main_foo(&temp);
-	}
-}
-```
+6502 instruction set reference: https://www.masswerk.at/6502/6502_instruction_set.html

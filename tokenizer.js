@@ -16,6 +16,7 @@ function tokenize(string) {
 
 		let match;
 
+		// TODO arrayify this bish
 		if (match = string.match(/^public|^private|^protected|^default/)) {
 
 			tokens.push(new Token("access modifier", match[0]));
@@ -24,10 +25,14 @@ function tokenize(string) {
 
 			tokens.push(new Token("classdef", match[0]));
 
-		} else if (match = string.match(/^{|^}|^boolean|^byte|^short|^int|^long|^float|^double|^char|^=|^;/)) {
+		} else if (match = string.match(/^{|^}|^=|^;/)) {
 
-			tokens.push(new Token(match[0]));
+			tokens.push(new Token(match[0])); // a bunch of keywords whose appearance is their internal type
 
+		} else if (match = string.match(/^boolean|^byte|^short|^int|^long|^float|^double|^char|^void/)) {
+
+			tokens.push(new Token("primitive", match[0]));
+		
 		} else if (match = string.match(/^-?[0-9]+(\.[0-9]*)?/)) {
 
 			tokens.push(new Token("number", match[0]));
@@ -38,7 +43,7 @@ function tokenize(string) {
 
 		} else {
 
-			string = "";
+			string = ""; // give up
 		}
 
 		if (match)

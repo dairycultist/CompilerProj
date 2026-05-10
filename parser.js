@@ -1,8 +1,9 @@
 class Op { // Operator generalizes class, function, statement, and expression definitions because I'm crazy
 
-	constructor(type = "NOP", args = []) {
+	constructor(type = "NOP", args = [], next = undefined) {
 		this.type = type;
 		this.args = args;
+		this.next = next;
 	}
 
 	print(prefix = "") {
