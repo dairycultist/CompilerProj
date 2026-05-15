@@ -1,6 +1,5 @@
 /*
- * anything not within a function (aka in global scope) is run on
- * program start; all global variables are accessible to all functions
+ * Top-level code is run on program start and its variables are in global scope.
  */
 
 $x = 10.23;
