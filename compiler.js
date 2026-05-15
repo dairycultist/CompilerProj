@@ -5,7 +5,7 @@ const { tokenize } = require("./tokenizer.js");
 const filepaths = process.argv.slice(2);
 
 if (filepaths.length == 0) {
-	console.error("Must supply a .java file as a command-line argument.");
+	console.error("Must supply a .code file as a command-line argument.");
 	return;
 }
 
