@@ -1,3 +1,31 @@
+module.exports = { parse: parse };
+
+function parse(tokens) {
+
+	return new Block([
+			new Statement("assign", [new Expression("variable:x"), new Expression("number:5")]),
+			new Statement("assign", [new Expression("variable:x"), new Expression("add", [new Expression("variable:x"), new Expression("number:1")])]),
+			new Block([
+				new Expression("functioncall:print", [new Expression("variable:x")]),
+			])
+		])
+	.toString();
+}
+
+function parse_block(tokens) { // returns [Block, remaining_tokens]
+
+}
+
+function parse_statement(tokens) { // returns [Statement, remaining_tokens]
+
+}
+
+function parse_expression(tokens) { // returns [Expression, remaining_tokens]
+
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
 class Block { // a list of Blocks, Statements, and Expressions
 
 	constructor(interior = []) {
@@ -63,13 +91,3 @@ class Expression { // an expression that potentially has more Expressions inside
 		return construct + ")";
 	}
 }
-
-console.log(
-	new Block([
-		new Statement("assign", [new Expression("variable"), new Expression("number")]),
-		new Statement("assign", [new Expression("variable"), new Expression("add", [new Expression("variable"), new Expression("number")])]),
-		new Block([
-			new Expression("function call", [new Expression("variable"), new Expression("variable")]),
-		])
-	])
-.toString());
