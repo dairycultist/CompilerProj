@@ -9,9 +9,14 @@ class Token {
 }
 
 const token_types = [
-	{ typename: "binary operation", regex: "\\+|\\-|\\*|\\/" },
+	{ typename: "binary operation", regex: "\\+|-|\\*|/" },
+	{ typename: "assignment", regex: "=" },
 	{ typename: "number", regex: "-?[0-9]+(\.[0-9]*)?" },
 	{ typename: "variable", regex: "\\$[A-Za-z_$][A-Za-z0-9_$]*" },
+	{ typename: "function", regex: "\\![A-Za-z_$][A-Za-z0-9_$]*" },
+	{ typename: "statement terminator", regex: ";" },
+	{ typename: "open parenthesis", regex: "\\(" },
+	{ typename: "close parenthesis", regex: "\\)" },
 ];
 
 function tokenize(string) {
@@ -41,7 +46,7 @@ function tokenize(string) {
 		} else {
 
 			// failed to tokenize 1 token
-			console.log("Unknown token error: " + string.substring(0, Math.min(string.length, 20)) + "...");
+			console.log("\x1b[31mUnknown token error: \x1b[0m\n\t" + string.substring(0, Math.min(string.length, 20)));
 			process.exit(1);
 		}
 	}
