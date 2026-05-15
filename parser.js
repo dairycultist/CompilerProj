@@ -1,24 +1,75 @@
-class Op { // Operator generalizes class, function, statement, and expression definitions because I'm crazy
+class Block { // a list of Blocks, Statements, and Expressions
 
-	constructor(type = "NOP", args = [], next = undefined) {
-		this.type = type;
-		this.args = args;
-		this.next = next;
+	constructor(interior = []) {
+
+		this.interior = interior;
 	}
 
-	print(prefix = "") {
+	toString(prefix = "") {
 
-		if (this.args.length != 0) {
+		let construct = "";
 
-			console.log(prefix + "[" + this.type + "]:");
+		for (const element of this.interior) {
 
-			for (let arg of this.args)
-				arg.print(prefix + "  ");
-
-		} else {
-			console.log(prefix + this.type);
+			if (element instanceof Statement || element instanceof Expression) {
+				construct += prefix + element.toString() + "\n";
+			} else if (element instanceof Block) {
+				construct += element.toString(prefix + "  ");
+			}
 		}
+
+		return construct;
 	}
 }
 
-new Op("=", [new Op("x"), new Op("+", [new Op("5"), new Op("10")])]).print();
+class Statement { // does stuff with Expressions as parameters
+
+	constructor(type = "", expressions = []) {
+
+		this.type = type;
+		this.expressions = expressions;
+	}
+
+	toString() {
+
+		let construct = "[" + this.type + "]:";
+
+		for (const expression of this.expressions) {
+
+			construct += " " + expression.toString();
+		}
+
+		return construct;
+	}
+}
+
+class Expression { // an expression that potentially has more Expressions inside it
+
+	constructor(type = "", expressions = []) {
+
+		this.type = type;
+		this.expressions = expressions;
+	}
+	
+	toString() {
+
+		let construct = "(" + this.type;
+
+		for (const expression of this.expressions) {
+
+			construct += " " + expression.toString();
+		}
+
+		return construct + ")";
+	}
+}
+
+console.log(
+	new Block([
+		new Statement("assign", [new Expression("variable"), new Expression("number")]),
+		new Statement("assign", [new Expression("variable"), new Expression("add", [new Expression("variable"), new Expression("number")])]),
+		new Block([
+			new Expression("function call", [new Expression("variable"), new Expression("variable")]),
+		])
+	])
+.toString());
