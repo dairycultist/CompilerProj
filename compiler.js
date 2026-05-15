@@ -6,7 +6,7 @@ const { parse } = require("./parser.js");
 const filepaths = process.argv.slice(2);
 
 if (filepaths.length == 0) {
-	console.error("Must supply a .code file as a command-line argument.");
+	console.error("Format: " + process.argv[0].substring(process.argv[0].lastIndexOf("/") + 1) + " " + process.argv[1].substring(process.argv[1].lastIndexOf("/") + 1) + " yourprogram.code");
 	return;
 }
 

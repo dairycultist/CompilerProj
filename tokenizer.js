@@ -49,7 +49,7 @@ function tokenize(string) {
 		} else {
 
 			// failed to tokenize 1 token
-			console.log("\x1b[31mUnknown token error: \x1b[0m\n\t" + string.substring(0, Math.min(string.length, 20)));
+			console.error("Unknown token error:\n\t" + string.substring(0, Math.min(string.length, 40)) + "...\n\t^ here");
 			process.exit(1);
 		}
 	}

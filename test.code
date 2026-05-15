@@ -1,7 +1,12 @@
+/*
+ * anything not within a function (aka in global scope) is run on
+ * program start; all global variables are accessible to all functions
+ */
+
 $x = 10.23;
 $x = $x + 120.;
 
-!print($x);
+!foo($x 20);
 
 define !foo($x $y) {
 	
