@@ -2,3 +2,8 @@ $x = 10.23;
 $x = $x + 120.;
 
 !print($x);
+
+define !foo($x $y) {
+	
+	!print($x + $y);
+}

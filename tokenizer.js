@@ -13,10 +13,13 @@ const token_types = [
 	{ typename: "assignment", regex: "=" },
 	{ typename: "number", regex: "-?[0-9]+(\.[0-9]*)?" },
 	{ typename: "variable", regex: "\\$[A-Za-z_$][A-Za-z0-9_$]*" },
-	{ typename: "function", regex: "\\![A-Za-z_$][A-Za-z0-9_$]*" },
+	{ typename: "function call", regex: "\\![A-Za-z_$][A-Za-z0-9_$]*" },
 	{ typename: "statement terminator", regex: ";" },
 	{ typename: "open parenthesis", regex: "\\(" },
 	{ typename: "close parenthesis", regex: "\\)" },
+	{ typename: "open bracket", regex: "\\{" },
+	{ typename: "close bracket", regex: "\\}" },
+	{ typename: "function definer", regex: "define" },
 ];
 
 function tokenize(string) {
