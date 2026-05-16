@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Game</title>
+	<script type="module">
+
+		const canvas = document.getElementById("canvas");
+		const ctx = canvas.getContext("2d");
+
+		let focused = false;
+		let mousePresent = false;
+
+		canvas.addEventListener("keydown", function (event) {
+			document.getElementById("demo").innerHTML = "Down: " + event.code;
+		});
+
+		canvas.addEventListener("keyup", function (event) {
+			document.getElementById("demo").innerHTML = "Up: " + event.code;
+		});
+
+		canvas.addEventListener("mousemove", function (event) {
+			document.getElementById("demo").innerHTML = "Mouse: " + (event.clientX - canvas.offsetLeft) + " " + (event.clientY - canvas.offsetTop);
+		});
+
+		canvas.addEventListener("mousedown", function (event) {
+			document.getElementById("demo").innerHTML = "Mouse down";
+		});
+
+		canvas.addEventListener("mouseup", function (event) {
+			document.getElementById("demo").innerHTML = "Mouse up";
+		});
+
+		canvas.addEventListener("wheel", function (event) {
+			document.getElementById("demo").innerHTML = "Scroll: " + event.deltaY;
+		});
+
+		canvas.addEventListener("mouseenter", (event) => mousePresent = true);
+		canvas.addEventListener("mouseleave", (event) => mousePresent = false);
+
+		canvas.addEventListener("focus", (event) => focused = true);
+		canvas.addEventListener("blur", (event) => focused = false);
+
+		ctx.font = "30px Arial";
+		ctx.fillText("Hello World", 10, 50);
+	</script>
+</head>
+<body>
+	<canvas id="canvas" width="200" height="100"></canvas>
+	<div id="demo"></div>
+</body>
+</html>
