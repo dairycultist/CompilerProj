@@ -1,6 +1,6 @@
 module.exports = { parse: parse };
 
-function parse(tokens) {
+function parse(tokens) { // should return a dictionary of Blocks, with keys being either function names or "INTERNAL_toplevel" for the top level
 
 	return new Block([
 		new Statement("assign", [new Expression("variable:x"), new Expression("number:5")]),

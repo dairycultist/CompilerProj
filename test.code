@@ -1,9 +1,11 @@
 /*
- * Top-level code is run on program start.
+ * Top-level code is run on program start. Code written in !process() (a
+ * built-in abstract function -- the programmer MUST implement it) is called
+ * every frame.
  *
  * Variables are implicitly declared at the top of the function (not block)
  * they are initialized in. If they are initialized at the top-level (i.e.
- * outside of a function), they are declared in global scope.
+ * outside of a function), they are declared in global scope instead.
  * 
  * Compiler directives are used to tell the compiler:
  *   #RESOURCE(character.png) - a resource to bundle
@@ -11,9 +13,6 @@
  *   #SCALING(smooth)         - what window scaling algorithm to use (smooth,
  *                              crisp-edges, pixelated)
  *   #CLEAR(#FFF)             - what the clear color is
- *
- * !process() is special -- it is a built-in ABSTRACT function called every
- * frame that MUST be implemented by the programmer.
  */
 
 define !process() {

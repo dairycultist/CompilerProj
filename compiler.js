@@ -1,7 +1,7 @@
 module.exports = { compile: compile };
 
 
-function compile(ast) {
+function compile(blocks) {
 
 	return `
 		function process() {
