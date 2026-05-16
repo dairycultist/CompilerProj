@@ -6,66 +6,72 @@
 		<title>Game</title>
 		<script type="module">
 
-			const canvas = document.getElementById("canvas");
-			const ctx = canvas.getContext("2d");
-			ctx.font = "20px Arial";
+			const INTERNAL_canvas = document.getElementById("canvas");
+			const INTERNAL_ctx = INTERNAL_canvas.getContext("2d");
+			
+			INTERNAL_ctx.font = "20px Arial";
 
-			let focused = false;
-			let mousePresent = false;
-			let mouseX = 0;
-			let mouseY = 0;
-			let scroll = 0;
-			let keystates = {};
+			let INTERNAL_focused = false;
+			let INTERNAL_mousePresent = false;
+			let INTERNAL_mouseX = 0;
+			let INTERNAL_mouseY = 0;
+			let INTERNAL_scroll = 0;
+			let INTERNAL_keystates = {};
 
-			canvas.addEventListener("keydown", function (event) {
+			INTERNAL_canvas.addEventListener("keydown", function (event) {
 				if (event.code != "Tab" && event.code != "CapsLock") // these are finnicky so we're just gonna ignore them
-					keystates[event.code] = true;
+					INTERNAL_keystates[event.code] = true;
 			});
 
-			canvas.addEventListener("keyup", function (event) {
-				keystates[event.code] = false;
+			INTERNAL_canvas.addEventListener("keyup", function (event) {
+				INTERNAL_keystates[event.code] = false;
 			});
 
-			canvas.addEventListener("mousedown", function (event) {
+			INTERNAL_canvas.addEventListener("mousedown", function (event) {
 				if (event.button == 0)
-					keystates["Mouse"] = true;
+					INTERNAL_keystates["Mouse"] = true;
 			});
 
-			canvas.addEventListener("mouseup", function (event) {
+			INTERNAL_canvas.addEventListener("mouseup", function (event) {
 				if (event.button == 0)
-					keystates["Mouse"] = false;
+					INTERNAL_keystates["Mouse"] = false;
 			});
 
-			canvas.addEventListener("mousemove", function (event) {
-				mouseX = Math.trunc((event.clientX - canvas.offsetLeft) * 600 / canvas.clientWidth);
-				mouseY = Math.trunc((event.clientY - canvas.offsetTop) * 300 / canvas.clientHeight);
+			INTERNAL_canvas.addEventListener("mousemove", function (event) {
+				INTERNAL_mouseX = Math.trunc((event.clientX - INTERNAL_canvas.offsetLeft) * 600 / INTERNAL_canvas.clientWidth);
+				INTERNAL_mouseY = Math.trunc((event.clientY - INTERNAL_canvas.offsetTop) * 300 / INTERNAL_canvas.clientHeight);
 			});
 
-			canvas.addEventListener("wheel", function (event) {
-				scroll = event.deltaY;
+			INTERNAL_canvas.addEventListener("wheel", function (event) {
+				INTERNAL_scroll = event.deltaY;
 			});
 
-			canvas.addEventListener("mouseenter", (event) => mousePresent = true);
-			canvas.addEventListener("mouseleave", (event) => mousePresent = false);
+			INTERNAL_canvas.addEventListener("mouseenter", (event) => INTERNAL_mousePresent = true);
+			INTERNAL_canvas.addEventListener("mouseleave", (event) => INTERNAL_mousePresent = false);
 
-			canvas.addEventListener("focus", (event) => focused = true);
-			canvas.addEventListener("blur", (event) => focused = false);
+			INTERNAL_canvas.addEventListener("focus", (event) => INTERNAL_focused = true);
+			INTERNAL_canvas.addEventListener("blur", (event) => INTERNAL_focused = false);
 
 			setInterval(() => {
 
-				ctx.fillStyle = "#FFF";
-				ctx.fillRect(0, 0, 600, 300);
+				INTERNAL_ctx.fillStyle = "#FFF";
+				INTERNAL_ctx.fillRect(0, 0, 600, 300);
 
-				
-		if (keystates["Mouse"]) {
-			ctx.fillStyle = "#000";
-			ctx.fillText("mouse is down!", 0, 20);
-		}
-	
+				process();
 
-				scroll = 0;
+				INTERNAL_scroll = 0;
 
 			}, 1000.0 / 60);
+
+			
+		function process() {
+
+			if (INTERNAL_keystates["Mouse"]) {
+				INTERNAL_ctx.fillStyle = "#000";
+				INTERNAL_ctx.fillText("mouse is down!", 0, 20);
+			}
+		}
+	
 		</script>
 	</head>
 	<body style="background: black; margin: 0; height: 100vh; display: flex; align-items: center; justify-content: center;">

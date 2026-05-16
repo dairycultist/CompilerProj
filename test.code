@@ -5,7 +5,7 @@
  *   #RESOLUTION(1000, 500)  - what resolution the game window should be
  *   #SCALING(smooth)        - what window scaling algorithm to use (smooth, crisp-edges, pixelated)
  *   #CLEAR(#FFF)            - what the clear color is
- * Some function names correspond to built-in virtual functions that may (or are expected to be) overridden by the programmer, such as !frame().
+ * !process() is special -- it is a built-in abstract function called every frame that MUST be implemented by the programmer.
  */
 
 $x = 10.23;
@@ -16,4 +16,15 @@ $x = $x + 120.;
 define !foo($x $y) {
 	
 	!print($x + $y);
+}
+
+
+
+
+
+define !process() {
+
+	if (!pressed("Mouse")) {
+		!draw_text("mouse is down!" "#000" 0 20);
+	}
 }
