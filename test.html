@@ -36,8 +36,8 @@
 		});
 
 		canvas.addEventListener("mousemove", function (event) {
-			mouseX = event.clientX - canvas.offsetLeft;
-			mouseY = event.clientY - canvas.offsetTop;
+			mouseX = Math.trunc((event.clientX - canvas.offsetLeft) * 600 / canvas.clientWidth);
+			mouseY = Math.trunc((event.clientY - canvas.offsetTop) * 300 / canvas.clientHeight);
 		});
 
 		canvas.addEventListener("wheel", function (event) {
