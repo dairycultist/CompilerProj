@@ -1,4 +1,30 @@
+const fs = require("fs");
+const { sanitize } = require("./sanitizer.js");
+const { tokenize } = require("./tokenizer.js");
+const { parse } = require("./parser.js");
+const { compile } = require("./compiler.js");
 
+const filepaths = process.argv.slice(2);
+
+if (filepaths.length == 0) {
+	console.error("Format: " + process.argv[0].substring(process.argv[0].lastIndexOf("/") + 1) + " " + process.argv[1].substring(process.argv[1].lastIndexOf("/") + 1) + " yourprogram.code");
+	return;
+}
+
+try {
+	
+	const incode = fs.readFileSync(filepaths[0], "utf8");
+
+	// TODO parse out compiler directives
+	const width = 600;
+	const height = 300;
+	const clearColor = "#FFF";
+	const scalingAlg = "crisp-edges";
+
+	const outcode = compile(parse(tokenize(sanitize(incode))));
+
+	fs.writeFileSync(`${ filepaths[0].split(".", 1)[0] }.html`,
+	`
 	<!DOCTYPE html>
 	<html>
 	<head>
@@ -53,15 +79,10 @@
 
 			setInterval(() => {
 
-				ctx.fillStyle = "#FFF";
-				ctx.fillRect(0, 0, 600, 300);
+				ctx.fillStyle = "${ clearColor }";
+				ctx.fillRect(0, 0, ${ width }, ${ height });
 
-				
-		if (keystates["Mouse"]) {
-			ctx.fillStyle = "#000";
-			ctx.fillText("mouse is down!", 0, 20);
-		}
-	
+				${ outcode }
 
 				scroll = 0;
 
@@ -69,7 +90,11 @@
 		</script>
 	</head>
 	<body style="background: black; margin: 0; height: 100vh; display: flex; align-items: center; justify-content: center;">
-		<canvas id="canvas" width="600" height="300" tabindex="0" style="height: 50vw; width: 100vw; max-height: 100vh; max-width: 200vh; image-rendering: crisp-edges;"></canvas>
+		<canvas id="canvas" width="${ width }" height="${ height }" tabindex="0" style="height: ${ 100 * height / width }vw; width: 100vw; max-height: 100vh; max-width: ${ 100 * width / height }vh; image-rendering: ${ scalingAlg };"></canvas>
 	</body>
 	</html>
-	
+	`);
+
+} catch (err) {
+	console.error(err);
+}

@@ -49,8 +49,7 @@ function tokenize(string) {
 		} else {
 
 			// failed to tokenize 1 token
-			console.error("Unknown token error:\n\t" + string.substring(0, Math.min(string.length, 40)) + "...\n\t^ here");
-			process.exit(1);
+			throw new Error("Unknown token error:\n\t" + string.substring(0, Math.min(string.length, 40)) + "...\n\t^ here");
 		}
 	}
 
