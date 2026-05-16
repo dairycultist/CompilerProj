@@ -7,9 +7,13 @@
 
 		const canvas = document.getElementById("canvas");
 		const ctx = canvas.getContext("2d");
+		ctx.font = "20px Arial";
 
 		let focused = false;
 		let mousePresent = false;
+		let mouseX = 0;
+		let mouseY = 0;
+		let scroll = 0;
 
 		canvas.addEventListener("keydown", function (event) {
 			document.getElementById("demo").innerHTML = "Down: " + event.code;
@@ -19,11 +23,7 @@
 			document.getElementById("demo").innerHTML = "Up: " + event.code;
 		});
 
-		canvas.addEventListener("mousemove", function (event) {
-			document.getElementById("demo").innerHTML = "Mouse: " + (event.clientX - canvas.offsetLeft) + " " + (event.clientY - canvas.offsetTop);
-		});
-
-		canvas.addEventListener("mousedown", function (event) {
+		canvas.addEventListener("mousedown", function (event) { // treat the mouse button the same way as a key, i.e. put it in the keystate dictionary
 			document.getElementById("demo").innerHTML = "Mouse down";
 		});
 
@@ -31,8 +31,13 @@
 			document.getElementById("demo").innerHTML = "Mouse up";
 		});
 
+		canvas.addEventListener("mousemove", function (event) {
+			mouseX = event.clientX - canvas.offsetLeft;
+			mouseY = event.clientY - canvas.offsetTop;
+		});
+
 		canvas.addEventListener("wheel", function (event) {
-			document.getElementById("demo").innerHTML = "Scroll: " + event.deltaY;
+			scroll = event.deltaY;
 		});
 
 		canvas.addEventListener("mouseenter", (event) => mousePresent = true);
@@ -41,12 +46,23 @@
 		canvas.addEventListener("focus", (event) => focused = true);
 		canvas.addEventListener("blur", (event) => focused = false);
 
-		ctx.font = "30px Arial";
-		ctx.fillText("Hello World", 10, 50);
+		setInterval(() => {
+
+			ctx.fillStyle = "#FFF";
+			ctx.fillRect(0, 0, 200, 100);
+			ctx.fillStyle = "#000";
+			ctx.fillText(`Focused: ${ focused }`, 0, 20);
+			ctx.fillText(`Mouse present: ${ mousePresent }`, 0, 40);
+			ctx.fillText(`Mouse pos: ${ mouseX } ${ mouseY }`, 0, 60);
+			ctx.fillText(`Scroll: ${ scroll }`, 0, 80);
+
+			scroll = 0;
+
+		}, 1000.0 / 60);
 	</script>
 </head>
 <body>
-	<canvas id="canvas" width="200" height="100"></canvas>
+	<canvas id="canvas" width="200" height="100" tabindex="0"></canvas>
 	<div id="demo"></div>
 </body>
 </html>
