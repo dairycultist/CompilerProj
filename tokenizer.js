@@ -9,7 +9,7 @@ class Token {
 }
 
 const token_types = [
-	{ typename: "binary operation", regex: "\\+|-|\\*|/" },
+	{ typename: "operators", regex: "\\+|-|\\*|/|and|or|not" },
 	{ typename: "assignment", regex: "=" },
 	{ typename: "number", regex: "-?[0-9]+(\.[0-9]*)?" },
 	{ typename: "string", regex: "\"[^\"]*\"" },
