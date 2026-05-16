@@ -1,17 +1,19 @@
 /*
  * Top-level code is run on program start.
  *
- * Variables don't need to be declared to be used; they scope to the function
- * they are initialized in unless they were initialized on the top-level, in
- * which case they are in global scope.
+ * Variables are implicitly declared at the top of the function (not block)
+ * they are initialized in. If they are initialized at the top-level (i.e.
+ * outside of a function), they are declared in global scope.
  * 
  * Compiler directives are used to tell the compiler:
  *   #RESOURCE(character.png) - a resource to bundle
  *   #RESOLUTION(1000, 500)   - what resolution the game window should be
- *   #SCALING(smooth)         - what window scaling algorithm to use (smooth, crisp-edges, pixelated)
+ *   #SCALING(smooth)         - what window scaling algorithm to use (smooth,
+ *                              crisp-edges, pixelated)
  *   #CLEAR(#FFF)             - what the clear color is
  *
- * !process() is special -- it is a built-in ABSTRACT function called every frame that MUST be implemented by the programmer.
+ * !process() is special -- it is a built-in ABSTRACT function called every
+ * frame that MUST be implemented by the programmer.
  */
 
 define !process() {
@@ -19,7 +21,7 @@ define !process() {
 	if (!pressed("Mouse")) {
 		$text = "mouse is down!"
 	} else {
-		$text = "mouse is down!"
+		$text = "mouse is up!"
 	}
 
 	!draw_text($text "#000" 0 20);

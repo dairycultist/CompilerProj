@@ -3,13 +3,12 @@ module.exports = { parse: parse };
 function parse(tokens) {
 
 	return new Block([
-			new Statement("assign", [new Expression("variable:x"), new Expression("number:5")]),
-			new Statement("assign", [new Expression("variable:x"), new Expression("add", [new Expression("variable:x"), new Expression("number:1")])]),
-			new Block([
-				new Expression("functioncall:print", [new Expression("variable:x")]),
-			])
+		new Statement("assign", [new Expression("variable:x"), new Expression("number:5")]),
+		new Statement("assign", [new Expression("variable:x"), new Expression("add", [new Expression("variable:x"), new Expression("number:1")])]),
+		new Block([
+			new Expression("functioncall:print", [new Expression("variable:x")]),
 		])
-	.toString();
+	]);
 }
 
 function parse_block(tokens) { // returns [Block, remaining_tokens]

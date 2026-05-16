@@ -21,7 +21,7 @@ try {
 	const clearColor = "#FFF";
 	const scalingAlg = "crisp-edges";
 
-	console.log(tokenize(sanitize(incode))); // TEMP
+	console.log(parse(tokenize(sanitize(incode))).toString()); // TEMP
 
 	const outcode = compile(parse(tokenize(sanitize(incode))));
 
