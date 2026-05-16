@@ -1,6 +1,6 @@
 /*
  * Top-level code is run on program start and its variables are in global scope.
- * Compiler directives are used to tell the compiler 1) which resources to bundle 2) what aspect ratio the window should be.
+ * Compiler directives are used to tell the compiler 1) which resources to bundle 2) what resolution the game window should be 3) what window scaling algorithm to use (smooth, crisp-edges, pixelated).
  * Some function names correspond to built-in virtual functions that may (or are expected to be) overridden by the programmer, such as !frame().
  */
 

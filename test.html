@@ -14,11 +14,11 @@
 		let mouseX = 0;
 		let mouseY = 0;
 		let scroll = 0;
-
 		let keystates = {};
 
 		canvas.addEventListener("keydown", function (event) {
-			keystates[event.code] = true;
+			if (event.code != "Tab" && event.code != "CapsLock") // these are finnicky so we're just gonna ignore them
+				keystates[event.code] = true;
 		});
 
 		canvas.addEventListener("keyup", function (event) {
